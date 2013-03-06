@@ -1,0 +1,21 @@
+#!/bin/zsh
+foreach FILE in `man -w $@`; do
+PDFFILE="/tmp/gman${FILE%.gz}.pdf"
+# We don't want to recreate the PDF if it already exists and is newer than
+# the corresponding man page
+if [[ ! ${PDFFILE} -nt ${FILE} ]]; then
+   # cding into the man directory (two levels up from the actual man file)
+   # seems to be required for inclusions
+   cd $FILE:h:h
+   mkdir -p ${PDFFILE:h}
+   echo Generating ${PDFFILE}
+   if [[ $FILE == *.gz ]]; then
+      TEMPFILE="/tmp/gman${FILE%.gz}"
+      gzcat $FILE > $TEMPFILE
+      FILE=$TEMPFILE
+   fi
+   `grog $FILE` | pstopdf -i -o $PDFFILE
+fi
+open ${PDFFILE}
+done
+

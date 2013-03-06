@@ -1,0 +1,9 @@
+# xcrun aliases
+
+TOOLS=(git svn otool)
+
+for tool in $TOOLS; do
+   if ! which $tool >&/dev/null && which xcrun >&/dev/null; then
+      alias $tool="xcrun $tool"
+   fi
+done

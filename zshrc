@@ -37,6 +37,11 @@ SAVEHIST=3000
 DIRSTACKSIZE=10
 
 # Configure ls
+
+if alias ls >& /dev/null ; then
+   unalias ls
+fi
+
 if which gls >& /dev/null ; then
    LSPATH=`which gls`
 else

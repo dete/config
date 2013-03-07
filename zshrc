@@ -1,7 +1,8 @@
 # oh-my-zsh configuration options
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="arrow"
+ZSH_THEME="dete-arrow"
 COMPLETION_WAITING_DOTS="true"
+ZSH_CUSTOM=~/config/zsh-custom
 
 plugins=(git)
 
@@ -36,18 +37,19 @@ HISTSIZE=3000
 SAVEHIST=3000
 DIRSTACKSIZE=10
 
-# Configure ls
-
+# Remove any extant alias for LS (oh-my-zsh adds one)
 if alias ls >& /dev/null ; then
    unalias ls
 fi
 
+# Use gls if it exists (it wouldn't exist if we didn't need it!)
 if which gls >& /dev/null ; then
    LSPATH=`which gls`
 else
    LSPATH=`which ls`
 fi
 
+# find those LS options which "this LS" supports
 LSOPTS=''
 if $LSPATH --color=auto / >&/dev/null; then
   LSOPTS=$LSOPTS' --color=auto'
@@ -63,8 +65,10 @@ if $LSPATH -h / >&/dev/null; then
   LSOPTS=$LSOPTS' -h'
 fi
 
+# Create our standard LS alias
 alias ls="${LSPATH}${LSOPTS}"
 
+# Use dircolors (or gdircolors) if it exists
 DIRC=''
 
 if which gdircolors >& /dev/null ; then
@@ -76,15 +80,29 @@ fi
 if [ -x $DIRC ] && [ -e ~/config/dircolors ] ; then
    eval $( $DIRC ~/config/dircolors )
 fi
+
+# A clever replacement for CD that will work even if the target is a file
+cd () {
+  if (( $# != 1 )); then
+    builtin cd "$@"
+    return
+  fi
+
+  if [[ -f "$1" ]]; then
+    builtin cd "$1:h"
+  else
+    builtin cd "$1"
+  fi
+}
    
 # Run any platform specific code
 case `uname -s` in
    Darwin)
-      test -f ~/config/zshrc.mac && source ~/config/zshrc.mac
+      test -f ~/config/zshrc-mac && source ~/config/zshrc-mac
       ;;
 
    Linux)
-      test -f ~/config/zshrc.linux && source ~/config/zshrc.linux
+      test -f ~/config/zshrc-linux && source ~/config/zshrc-linux
       ;;
 
    *)

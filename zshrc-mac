@@ -8,3 +8,4 @@ for tool in $TOOLS; do
    fi
 done
 
+alias ff='open -a Xee'

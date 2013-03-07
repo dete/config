@@ -7,3 +7,4 @@ for tool in $TOOLS; do
       alias $tool="xcrun $tool"
    fi
 done
+

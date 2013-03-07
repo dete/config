@@ -1,31 +1,39 @@
+# oh-my-zsh configuration options
 ZSH_THEME="arrow"
 COMPLETION_WAITING_DOTS="true"
 
 plugins=(git)
 
-export PATH=~/config/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl
+# My Path
+export PATH=~/config/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 
-if [ -x `which vless` ] ; then
+# Use vim and vimless
+if /usr/bin/which -s vless ; then
    export PAGER=vless
    alias less=vless
    alias more=vless
 fi
 
-if [ -x `which vmanpager` ] ; then
+if /usr/bin/which -s vmanpager ; then
    export MANPAGER=vmanpager
 fi
 
+if /usr/bin/which -s vim ; then
+   export EDITOR=vim
+   alias vi=vim
+fi
+
+# Run any platform specific code
 case `uname -s` in
    Darwin)
-   echo "It's a mac!"
-   ;;
+      test -f ~/config/zshrc.mac && source ~/config/zshrc.mac
+      ;;
 
    Linux)
-   echo "It's linux!"
-   ;;
+      test -f ~/config/zshrc.linux && source ~/config/zshrc.linux
+      ;;
 
    *)
-   echo "Unknown OS; aborting"
-   exit 0
-   ;;
+      echo "WARNING: Unknown OS"
+      ;;
 esac

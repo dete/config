@@ -8,17 +8,17 @@ plugins=(git)
 export PATH=~/config/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 
 # Use vim and vimless
-if /usr/bin/which -s vless ; then
+if which vless >& /dev/null ; then
    export PAGER=vless
    alias less=vless
    alias more=vless
 fi
 
-if /usr/bin/which -s vmanpager ; then
+if which vmanpager >& /dev/null ; then
    export MANPAGER=vmanpager
 fi
 
-if /usr/bin/which -s vim ; then
+if which vim >& /dev/null ; then
    export EDITOR=vim
    alias vi=vim
 fi

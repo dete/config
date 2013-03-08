@@ -14,5 +14,3 @@ fi
 export HOST_ACCENT
 
 PATH=$PATH:/usr/local/bin
-
-_byobu_sourced=1 . /usr/local/Cellar/byobu/5.30/bin/byobu-launch

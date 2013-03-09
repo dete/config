@@ -1,4 +1,4 @@
 unbind-key -n C-a
-set -g prefix ^A
-set -g prefix2 ^A
-bind a send-prefix
+set -g prefix ^G
+set -g prefix2 ^G
+bind g send-prefix

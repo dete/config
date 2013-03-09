@@ -78,7 +78,11 @@ elif which dircolors >& /dev/null ; then
 fi
 
 if [ -x $DIRC ] && [ -e ~/config/dircolors ] ; then
+   # sets the LS_COLORS variable (used by gls)
    eval $( $DIRC ~/config/dircolors )
+
+   # tell zsh's completion code to use those same colors
+   zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 fi
 
 # A clever replacement for CD that will work even if the target is a file
@@ -94,6 +98,18 @@ cd () {
     builtin cd "$1"
   fi
 }
+
+# Key-bindings
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
+
+bindkey '^[q' push-line-or-edit
+bindkey '^G' list-expand
+
+bindkey '^z' undo
+bindkey '^r' redo
    
 # Run any platform specific code
 case `uname -s` in

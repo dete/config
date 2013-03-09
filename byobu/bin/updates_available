@@ -89,6 +89,7 @@ ___update_needed() {
 	elif $BYOBU_TEST pacman >/dev/null; then
 		# Archlinux
 		local db
+		[ /var/log/pacman.log -nt "$mycache" ] && return 0
 		for db in /var/lib/pacman/sync/*.db; do
 			[ "$db" -nt "$mycache" ] && return 0
 		done

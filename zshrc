@@ -31,6 +31,9 @@ if which vim >& /dev/null ; then
    alias vi=vim
 fi
 
+# Other useful aliases
+alias du1="du -h -d1"
+
 # I want lots of scrollback history
 HISTFILE=~/.zshhistory
 HISTSIZE=3000

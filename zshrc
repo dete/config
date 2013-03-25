@@ -4,7 +4,7 @@ ZSH_THEME="dete-arrow"
 COMPLETION_WAITING_DOTS="true"
 ZSH_CUSTOM=~/config/zsh-custom
 
-plugins=(git)
+plugins=(brew git-extras history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -100,12 +100,12 @@ cd () {
 }
 
 # Key-bindings
-autoload up-line-or-beginning-search
-autoload down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-bindkey "^[[A" up-line-or-beginning-search
-bindkey "^[[B" down-line-or-beginning-search
+#autoload up-line-or-beginning-search
+#autoload down-line-or-beginning-search
+#zle -N up-line-or-beginning-search
+#zle -N down-line-or-beginning-search
+#bindkey "^[[A" up-line-or-beginning-search
+#bindkey "^[[B" down-line-or-beginning-search
 
 bindkey '^[q' push-line-or-edit
 bindkey '^G' list-expand

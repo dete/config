@@ -9,3 +9,4 @@ for tool in $TOOLS; do
 done
 
 alias ff='open -a Xee'
+alias mp="mplayer"

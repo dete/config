@@ -33,6 +33,7 @@ fi
 
 # Other useful aliases
 alias du1="du -h -d1"
+alias 0="cd ~0"
 
 # I want lots of scrollback history
 HISTFILE=~/.zshhistory

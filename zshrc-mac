@@ -1,15 +1,11 @@
 # xcrun aliases
 
-TOOLS=(svn otool)
-
-for tool in $TOOLS; do
-   if ! which $tool >&/dev/null && which xcrun >&/dev/null; then
-      alias $tool="xcrun $tool"
-   fi
-done
-
-alias ff='open -a Xee'
+alias ff='open -a Xee³'
 alias mp="mplayer"
+alias axdrop='HOME=$HOME/AxiomDrop /Applications/Dropbox.app/Contents/MacOS/Dropbox &'
+
+alias pbcopy='reattach-to-user-namespace pbcopy'
+alias pbpaste='reattach-to-user-namespace pbpaste'
 
 if [ -d /usr/local/texlive/2012/bin/x86_64-darwin ]; then
    export PATH="${PATH}:/usr/local/texlive/2012/bin/x86_64-darwin"

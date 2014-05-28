@@ -1,4 +1,4 @@
-source /usr/share/doc/pkgfile/command-not-found.zsh
+test -f /usr/share/doc/pkgfile/command-not-found.zsh && source /usr/share/doc/pkgfile/command-not-found.zsh
 
 # see if cp supports --reflink
 if cp --reflink=auto `mktemp` `mktemp` >&/dev/null; then

@@ -13,4 +13,8 @@ fi
 
 export HOST_ACCENT
 
+if which brew >& /dev/null ; then
+   export BYOBU_PREFIX=$(brew --prefix)
+fi
+
 PATH=$PATH:/usr/local/bin

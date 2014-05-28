@@ -1,0 +1,7 @@
+#! /bin/zsh
+pushd ~
+ln -s config/byobu .byobu
+echo 'source ~/config/zprofile' > .zprofile
+echo 'source ~/config/zshrc' > .zshrc
+echo 'source ~/config/vimrc' > .vimrc
+popd

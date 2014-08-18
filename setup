@@ -4,4 +4,6 @@ ln -s config/byobu .byobu
 echo 'source ~/config/zprofile' > .zprofile
 echo 'source ~/config/zshrc' > .zshrc
 echo 'source ~/config/vimrc' > .vimrc
+mkdir -p .vim
+ln -s config/vim-colors .vim/colors
 popd

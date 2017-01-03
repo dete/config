@@ -73,7 +73,7 @@ fi
 alias ls="${LSPATH}${LSOPTS}"
 
 # Use dircolors (or gdircolors) if it exists
-DIRC=''
+DIRC='dummy'
 
 if which gdircolors >& /dev/null ; then
    DIRC=`which gdircolors`

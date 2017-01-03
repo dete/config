@@ -1,7 +1,6 @@
 # xcrun aliases
 
 alias ff='open -a Xee³'
-alias mp="mplayer"
 alias axdrop='HOME=$HOME/AxiomDrop /Applications/Dropbox.app/Contents/MacOS/Dropbox &'
 
 alias pbcopy='reattach-to-user-namespace pbcopy'

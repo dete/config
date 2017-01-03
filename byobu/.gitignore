@@ -1,3 +1,5 @@
 .ssh-agent
 .tmux.conf
 .welcome-displayed
+datetime.tmux
+windows.tmux

@@ -3,3 +3,4 @@
 .welcome-displayed
 datetime.tmux
 windows.tmux
+disable-autolaunch

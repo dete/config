@@ -9,7 +9,8 @@ plugins=(brew git-extras history-substring-search)
 source $ZSH/oh-my-zsh.sh
 
 # My Path
-export PATH=~/config/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
+export PATH="$HOME/config/bin${PATH+:$PATH}"
+
 
 # Automatically display 'time' stats when a process takes more than 10 seconds
 TIMEFMT='User: %U  Kernel: %S  Real: %*E  Load:%P Mem:%M'

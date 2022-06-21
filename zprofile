@@ -13,8 +13,10 @@ fi
 
 export HOST_ACCENT
 
+if [ -x /opt/homebrew/bin/brew ] ; then
+   eval $(/opt/homebrew/bin/brew shellenv)
+fi
+
 if which brew >& /dev/null ; then
    export BYOBU_PREFIX=$(brew --prefix)
 fi
-
-PATH=$PATH:/usr/local/bin

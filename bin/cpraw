@@ -36,9 +36,6 @@ if [ ! ${RAW_COUNT} -gt 0 ]; then
    exit
 fi
 
-TARGET_DIR="${SYNC_ROOT}/$(date '+%F')"
-mkdir -p ${TARGET_DIR}
-
 if [ ! -d ${TARGET_DIR} ]; then
    echo "Target directory could not be created"
    exit
@@ -47,12 +44,15 @@ fi
 declare -i PROCESSED_COUNT COPIED_COUNT
 
 for SOURCE_FILE in ${IMG_DIR}/*.RAF; do
-   if find ${SYNC_ROOT} -name "${SOURCE_FILE:t}" -print -quit | read ; then
+   TARGET_PATH="${SYNC_ROOT}/$(date -r ${SOURCE_FILE} '+%F')/${SOURCE_FILE:t}"
+
+   if [ -f ${TARGET_PATH} ]; then
       echo -n .
    else
-      echo -n '#'
-      cp ${SOURCE_FILE} ${TARGET_DIR}
+      mkdir -p ${TARGET_PATH:h}
+      cp ${SOURCE_FILE} ${TARGET_PATH}
       ((COPIED_COUNT++))
+      echo -n '#'
    fi
    ((PROCESSED_COUNT++))
    if [ $((PROCESSED_COUNT%50)) -eq 0 ]; then
@@ -63,4 +63,4 @@ done
 echo
 echo "${COPIED_COUNT} files copied"
 
-rsync -av ${SYNC_ROOT}/ dete@23.239.2.59:Raw
+#rsync -av ${SYNC_ROOT}/ dete@23.239.2.59:Raw

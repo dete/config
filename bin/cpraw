@@ -1,7 +1,6 @@
 #!/usr/bin/env zsh
 
-#SD_MOUNT="/Volumes/Untitled"
-SD_MOUNT="${HOME}/Untitled"
+SD_MOUNT="/Volumes/Untitled"
 IMG_DIR="${SD_MOUNT}/DCIM/FUJI100"
 
 SYNC_ROOT="${HOME}/Pictures/Raw"

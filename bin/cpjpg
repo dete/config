@@ -1,0 +1,63 @@
+#!/usr/bin/env zsh
+
+SD_MOUNT="/Volumes/Untitled"
+IMG_DIR="${SD_MOUNT}/DCIM/100_FUJI"
+
+SYNC_ROOT="${HOME}/Pictures/Imports"
+
+if [ ! -d ${SD_MOUNT} ]; then
+   echo "Card not found. Is it mounted?"
+   /bin/ls -1 /Volumes
+   exit
+fi
+
+if [[ $(/bin/ls -1 ${SD_MOUNT} | wc -l) -ne 1 ]]; then
+   echo "Extra files found at root level of card. We're panicking!"
+   exit
+fi
+
+if [[ $(/bin/ls -1 ${IMG_DIR:h} | wc -l) -ne 1 ]]; then
+   echo "Extra files found in DCIM dir. We're panicking!"
+   exit
+fi
+
+if [ ! -d "${IMG_DIR}" ]; then
+   echo "Image directory not found. Check directory structure of the card."
+   exit
+fi
+
+declare -i JPG_COUNT MOV_COUNT
+JPG_COUNT=$(/bin/ls -1 ${IMG_DIR}/*.JPG | wc -l)
+MOV_COUNT=$(/bin/ls -1 ${IMG_DIR}/*.MOV | wc -l)
+echo "${JPG_COUNT} images found, ${MOV_COUNT} videos"
+
+if [ ! ${RAW_COUNT} -gt 0 ]; then
+   #nothing to do!
+   exit
+fi
+
+declare -i PROCESSED_COUNT COPIED_COUNT
+
+for SOURCE_FILE in ${IMG_DIR}/*.RAF; do
+   TARGET_PATH="${SYNC_ROOT}/$(date -r ${SOURCE_FILE} '+%F')/${SOURCE_FILE:t}"
+
+   if [ -f ${TARGET_PATH} ]; then
+      echo -n .
+   else
+      mkdir -p ${TARGET_PATH:h}
+      cp ${SOURCE_FILE} ${TARGET_PATH}
+      ((COPIED_COUNT++))
+      echo -n '#'
+   fi
+   ((PROCESSED_COUNT++))
+   if [ $((PROCESSED_COUNT%50)) -eq 0 ]; then
+      echo "  ${PROCESSED_COUNT}/${RAW_COUNT}"
+   fi
+done
+
+echo
+echo "${COPIED_COUNT} files copied"
+
+diskutil eject ${SD_MOUNT}
+
+rsync -av ${SYNC_ROOT}/ dete@23.239.2.59:Raw

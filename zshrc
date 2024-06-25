@@ -17,11 +17,11 @@ TIMEFMT='User: %U  Kernel: %S  Real: %*E  Load:%P Mem:%M'
 REPORTTIME=10
 
 # Use vim and vimless
-if which vless >& /dev/null ; then
-   export PAGER=`which vless`
-   alias less=vless
-   alias more=vless
-fi
+#if which vless >& /dev/null ; then
+   #export PAGER=`which vless`
+   #alias less=vless
+   #alias more=vless
+#fi
 
 if which vmanpager >& /dev/null ; then
    export MANPAGER=`which vmanpager`
@@ -103,6 +103,9 @@ cd () {
     builtin cd "$1"
   fi
 }
+
+autoload zmv
+alias mmv='noglob zmv -W'
 
 # Key-bindings
 #autoload up-line-or-beginning-search
